@@ -1,0 +1,36 @@
+--- gupnp-vala-0.6.12/configure.ac.orig	2010-09-16 16:47:25.000000000 +0200
++++ gupnp-vala-0.6.12/configure.ac	2011-02-05 14:52:06.292686361 +0100
+@@ -7,23 +7,11 @@
+ 
+ AC_CONFIG_HEADERS([config.h])
+ 
+-AC_PATH_PROG(VALAC, valac, no)
+-if test "x$VALAC" = "xno"; then
+-	AC_MSG_ERROR([Cannot find the "valac" compiler in your PATH])
+-fi
+-
+-AC_PATH_PROG(VAPIGEN, vapigen, no)
+-if test "x$VAPIGEN" = "xno"; then
+-	AC_MSG_ERROR([Cannot find the "vapigen" binary in your PATH])
+-fi
+-
+ AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+ if test "x$PKG_CONFIG" = "xno"; then
+ 	AC_MSG_ERROR([Cannot find the "pkg-config" program in your PATH])
+ fi
+ 
+-PKG_CHECK_MODULES(VALA, [vala-0.10 >= 0.9.5])
+-
+ PKG_CHECK_MODULES(GSSDP, [gssdp-1.0 >= 0.7.2])
+ 
+ PKG_CHECK_MODULES(GUPNP, [gupnp-1.0 >= 0.13.3],
+--- gupnp-vala-0.6.12/Makefile.am.orig	2010-09-16 15:47:20.000000000 +0200
++++ gupnp-vala-0.6.12/Makefile.am	2011-02-05 14:59:34.528686361 +0100
+@@ -1,7 +1,5 @@
+ include $(top_srcdir)/Makefile.decls
+ 
+-SUBDIRS = . tests
+-
+ pkgconfig_DATA= gupnp-vala-1.0.pc
+ pkgconfigdir = $(libdir)/pkgconfig
+ 
