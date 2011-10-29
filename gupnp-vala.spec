@@ -6,25 +6,25 @@
 Summary:	Vala bindings to GUPnP libraries
 Summary(pl.UTF-8):	Wiązania języka Vala do bibliotek GUPnP
 Name:		gupnp-vala
-# note: 0.8.x is stable, 0.9.x unstable
-Version:	0.8.0
+# note: 0.10.x is stable, 0.11.x unstable
+Version:	0.10.2
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
-#Source0Download: http://gupnp.org/download
-Source0:	http://gupnp.org/sites/all/files/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	9d5d15ca5b540289552a9504f9f9c0f3
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gupnp-vala/0.10/%{name}-%{version}.tar.xz
+# Source0-md5:	a8c9220073a471d03dd2212c503d2920
 Patch0:		%{name}-notests.patch
 URL:		http://gupnp.org/
-BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake
-BuildRequires:	gssdp-devel >= 0.9.2
-BuildRequires:	gupnp-av-devel >= 0.7.0
-BuildRequires:	gupnp-devel >= 0.13.3
-BuildRequires:	gupnp-dlna-devel >= 0.5.1
-BuildRequires:	gupnp-ui-devel >= 0.1.1
+BuildRequires:	autoconf >= 2.64
+BuildRequires:	automake >= 1:1.11
+BuildRequires:	gssdp-devel >= 0.12.0
+BuildRequires:	gupnp-av-devel >= 0.10.0
+BuildRequires:	gupnp-devel >= 0.18.0
+BuildRequires:	gupnp-dlna-devel >= 0.6.0
 BuildRequires:	pkgconfig
+BuildRequires:	tar >= 1:1.22
 %{?with_tests:BuildRequires:	vala >= 0.11.3}
+BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,7 +37,7 @@ Wiązania języka Vala do bibliotek GUPnP.
 Summary:	Vala binding for GSSDP library
 Summary(pl.UTF-8):	Wiązanie języka Vala do biblioteki GSSDP
 Group:		Development/Libraries
-Requires:	gssdp-devel >= 0.9.2
+Requires:	gssdp-devel >= 0.12.0
 Requires:	vala >= 0.11.3
 
 %description -n vala-gssdp
@@ -50,7 +50,7 @@ Wiązanie języka Vala do biblioteki GSSDP.
 Summary:	Vala binding for GUPnP library
 Summary(pl.UTF-8):	Wiązanie języka Vala do biblioteki GUPnP
 Group:		Development/Libraries
-Requires:	gupnp-devel >= 0.13.3
+Requires:	gupnp-devel >= 0.18.0
 Requires:	vala-gssdp = %{version}-%{release}
 
 %description -n vala-gupnp
@@ -63,7 +63,7 @@ Wiązanie języka Vala do biblioteki GUPnP.
 Summary:	Vala binding for GUPnP AV library
 Summary(pl.UTF-8):	Wiązanie języka Vala do biblioteki GUPnP AV
 Group:		Development/Libraries
-Requires:	gupnp-av-devel >= 0.7.0
+Requires:	gupnp-av-devel >= 0.10.0
 Requires:	vala-gupnp = %{version}-%{release}
 
 %description -n vala-gupnp-av
@@ -74,9 +74,9 @@ Wiązanie języka Vala do biblioteki GUPnP AV.
 
 %package -n vala-gupnp-dlna
 Summary:	Vala binding for GUPnP DLNA library
-Summary(pl.UTF-8):	Wiązanie języka Vala do biblioteki GUPnP DLNA 
+Summary(pl.UTF-8):	Wiązanie języka Vala do biblioteki GUPnP DLNA
 Group:		Development/Libraries
-Requires:	gupnp-dlna-devel >= 0.5.1
+Requires:	gupnp-dlna-devel >= 0.6.0
 Requires:	vala-gupnp = %{version}-%{release}
 
 %description -n vala-gupnp-dlna
@@ -84,19 +84,6 @@ Vala binding for GUPnP DLNA library.
 
 %description -n vala-gupnp-dlna -l pl.UTF-8
 Wiązanie języka Vala do biblioteki GUPnP DLNA.
-
-%package -n vala-gupnp-ui
-Summary:	Vala binding for GUPnP-UI library
-Summary(pl.UTF-8):	Wiązanie języka Vala do biblioteki GUPnP-UI 
-Group:		Development/Libraries
-Requires:	gupnp-ui-devel >= 0.1.1
-Requires:	vala-gupnp = %{version}-%{release}
-
-%description -n vala-gupnp-ui
-Vala binding for GUPnP-UI library.
-
-%description -n vala-gupnp-ui -l pl.UTF-8
-Wiązanie języka Vala do biblioteki GUPnP-UI.
 
 %prep
 %setup -q
@@ -107,8 +94,8 @@ Wiązanie języka Vala do biblioteki GUPnP-UI.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
-
+%configure \
+	--disable-silent-rules
 %{__make}
 
 %install
@@ -141,8 +128,3 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_datadir}/vala/vapi/gupnp-dlna-1.0.deps
 %{_datadir}/vala/vapi/gupnp-dlna-1.0.vapi
-
-%files -n vala-gupnp-ui
-%defattr(644,root,root,755)
-%{_datadir}/vala/vapi/gupnp-ui-1.0.deps
-%{_datadir}/vala/vapi/gupnp-ui-1.0.vapi
