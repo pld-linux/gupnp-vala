@@ -52,6 +52,7 @@ Summary(pl.UTF-8):	Wiązanie języka Vala do biblioteki GUPnP
 Group:		Development/Libraries
 Requires:	gupnp-devel >= 0.18.0
 Requires:	vala-gssdp = %{version}-%{release}
+Obsoletes:	vala-gupnp-ui
 
 %description -n vala-gupnp
 Vala binding for GUPnP library.
