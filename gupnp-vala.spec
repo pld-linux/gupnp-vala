@@ -7,12 +7,12 @@ Summary:	Vala bindings to GUPnP libraries
 Summary(pl.UTF-8):	Wiązania języka Vala do bibliotek GUPnP
 Name:		gupnp-vala
 # note: 0.10.x is stable, 0.11.x unstable
-Version:	0.10.2
+Version:	0.10.3
 Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gupnp-vala/0.10/%{name}-%{version}.tar.xz
-# Source0-md5:	a8c9220073a471d03dd2212c503d2920
+# Source0-md5:	7ffe2fff14ae8adf3111e09008862b5c
 Patch0:		%{name}-notests.patch
 URL:		http://gupnp.org/
 BuildRequires:	autoconf >= 2.64
