@@ -2,6 +2,7 @@
 #
 # Conditional build:
 %bcond_without	tests	# don't build tests
+%bcond_with	vala_gssdp	# use vala-gssdp from gssdp 0.12.2+
 #
 Summary:	Vala bindings to GUPnP libraries
 Summary(pl.UTF-8):	Wiązania języka Vala do bibliotek GUPnP
@@ -25,6 +26,11 @@ BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 %{?with_tests:BuildRequires:	vala >= 0.11.3}
 BuildRequires:	xz
+%if %{with vala_gssdp}
+BuildRequires:	vala-gssdp >= 0.12.2
+%else
+BuildRequires:	gssdp-devel < 0.12.2
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -51,7 +57,12 @@ Summary:	Vala binding for GUPnP library
 Summary(pl.UTF-8):	Wiązanie języka Vala do biblioteki GUPnP
 Group:		Development/Libraries
 Requires:	gupnp-devel >= 0.18.0
+Requires:	vala >= 0.11.3
+%if %{with vala_gssdp}
+Requires:	vala-gssdp >= 0.12.2
+%else
 Requires:	vala-gssdp = %{version}-%{release}
+%endif
 Obsoletes:	vala-gupnp-ui
 
 %description -n vala-gupnp
@@ -108,17 +119,19 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %{without vala_gssdp}
 %files -n vala-gssdp
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
 %{_datadir}/vala/vapi/gssdp-1.0.deps
 %{_datadir}/vala/vapi/gssdp-1.0.vapi
-%{_pkgconfigdir}/gupnp-vala-1.0.pc
+%endif
 
 %files -n vala-gupnp
 %defattr(644,root,root,755)
+%doc AUTHORS ChangeLog NEWS README TODO
 %{_datadir}/vala/vapi/gupnp-1.0.deps
 %{_datadir}/vala/vapi/gupnp-1.0.vapi
+%{_pkgconfigdir}/gupnp-vala-1.0.pc
 
 %files -n vala-gupnp-av
 %defattr(644,root,root,755)
