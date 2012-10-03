@@ -2,14 +2,14 @@
 #
 # Conditional build:
 %bcond_without	tests	# don't build tests
-%bcond_with	vala_gssdp	# use vala-gssdp from gssdp 0.12.2+
+%bcond_without	vala_gssdp	# use vala-gssdp from gssdp 0.12.2+
 #
 Summary:	Vala bindings to GUPnP libraries
 Summary(pl.UTF-8):	Wiązania języka Vala do bibliotek GUPnP
 Name:		gupnp-vala
 # note: 0.10.x is stable, 0.11.x unstable
 Version:	0.10.4
-Release:	2
+Release:	3
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gupnp-vala/0.10/%{name}-%{version}.tar.xz
