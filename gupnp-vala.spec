@@ -1,26 +1,34 @@
 # NOTE: it's gupnp-vala.spec to allow having vala-gupnp as subpackage
 #
 # Conditional build:
-%bcond_without	tests	# don't build tests
+%bcond_without	tests		# don't build tests
 %bcond_without	vala_gssdp	# use vala-gssdp from gssdp 0.12.2+
+%bcond_without	gupnp		# gupnp binding (will be included in gupnp >= 0.19.0)
+%bcond_without	gupnp_av	# gupnp-av binding (will be included in gupnp-av >= 0.11.0)
 #
 Summary:	Vala bindings to GUPnP libraries
 Summary(pl.UTF-8):	Wiązania języka Vala do bibliotek GUPnP
 Name:		gupnp-vala
 # note: 0.10.x is stable, 0.11.x unstable
-Version:	0.10.4
-Release:	3
+Version:	0.10.5
+Release:	1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gupnp-vala/0.10/%{name}-%{version}.tar.xz
-# Source0-md5:	fc567efde4b595e3eabf35724a8115d2
+# Source0-md5:	ab35180fccaa52dc30859f62f66edac1
 Patch0:		%{name}-notests.patch
 URL:		http://gupnp.org/
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	gssdp-devel >= 0.12.0
+%if %{with gupnp_av}
 BuildRequires:	gupnp-av-devel >= 0.10.0
+BuildRequires:	gupnp-av-devel < 0.11.0
+%endif
+%if %{with gupnp}
 BuildRequires:	gupnp-devel >= 0.18.0
+BuildRequires:	gupnp-devel < 0.19.0
+%endif
 BuildRequires:	gupnp-dlna-devel >= 0.6.0
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
@@ -126,17 +134,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/gssdp-1.0.vapi
 %endif
 
+%if %{with gupnp}
 %files -n vala-gupnp
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
 %{_datadir}/vala/vapi/gupnp-1.0.deps
 %{_datadir}/vala/vapi/gupnp-1.0.vapi
 %{_pkgconfigdir}/gupnp-vala-1.0.pc
+%endif
 
+%if %{with gupnp_av}
 %files -n vala-gupnp-av
 %defattr(644,root,root,755)
 %{_datadir}/vala/vapi/gupnp-av-1.0.deps
 %{_datadir}/vala/vapi/gupnp-av-1.0.vapi
+%endif
 
 %files -n vala-gupnp-dlna
 %defattr(644,root,root,755)
