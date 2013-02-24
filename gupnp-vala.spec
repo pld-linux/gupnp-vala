@@ -1,3 +1,4 @@
+# OBSOLETE spec, see individual {gssdp,gupnp,gupnp-av,gupnp-dlna}.spec for current Vala bindings
 # NOTE: it's gupnp-vala.spec to allow having vala-gupnp as subpackage
 #
 # Conditional build:
@@ -11,7 +12,7 @@ Summary(pl.UTF-8):	Wiązania języka Vala do bibliotek GUPnP
 Name:		gupnp-vala
 # note: 0.10.x is stable, 0.11.x unstable
 Version:	0.10.5
-Release:	1
+Release:	1.1
 License:	LGPL v2+
 Group:		Development/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gupnp-vala/0.10/%{name}-%{version}.tar.xz
